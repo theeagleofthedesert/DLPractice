@@ -11,13 +11,14 @@ import model.net as net
 import model.data_loader as data_loader
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--data_dir', default='data/64x64',
+parser.add_argument('--data_dir', default='data\\64x64',
                     help="Directory containing the dataset")
-parser.add_argument('--model_dir', default='experiments/base_model',
+parser.add_argument('--model_dir', default='experiments\\base_model',
                     help="Directory containing params.json")
 parser.add_argument('--restore_file', default='best', help="name of the file in --model_dir \
                      containing weights to load")
-parser.add_argument('--output', default=False, help="whether output the test result")
+parser.add_argument('--output', default=True, help="whether output the test result")
+parser.add_argument('--raw_data_dir', default='data\\RawData', help="whether output the test result")
 
 
 def evaluate(model, loss_fn, dataloader, metrics, params):
@@ -37,13 +38,6 @@ def evaluate(model, loss_fn, dataloader, metrics, params):
 
     # summary for current eval loop
     summ = []
-
-    # get labels set
-    train_data_dir = os.path.join(args.data_dir, 'train')
-    labels = os.listdir(train_data_dir)
-
-    # save the output for submission
-    result = []
 
     # compute metrics over the dataset
     for data_batch, labels_batch in dataloader:
@@ -67,11 +61,6 @@ def evaluate(model, loss_fn, dataloader, metrics, params):
         summary_batch['loss'] = loss.item()
         summ.append(summary_batch)
 
-        # save the output for submission
-        if args.output:
-            output_batch = [labels[i] for i in np.argmax(output_batch, axis=1)]
-            result.extend(output_batch)
-
     # compute mean of all metrics in summary
     metrics_mean = {metric: np.mean([x[metric]
                                      for x in summ]) for metric in summ[0]}
@@ -79,14 +68,56 @@ def evaluate(model, loss_fn, dataloader, metrics, params):
                                 for k, v in metrics_mean.items())
     logging.info("- Eval metrics : " + metrics_string)
 
+    return metrics_mean
+
+def test(model, loss_fn, dataloader, metrics, params):
+    """Evaluate the model on testset.
+
+    Args:
+        model: (torch.nn.Module) the neural network
+        loss_fn: a function that takes batch_output and batch_labels and computes the loss for the batch
+        dataloader: (DataLoader) a torch.utils.data.DataLoader object that fetches data
+        metrics: (dict) a dictionary of functions that compute a metric using the output and labels of each batch
+        params: (Params) hyperparameters
+        num_steps: (int) number of batches to train on, each of size params.batch_size
+    """
+
+    # set model to evaluation mode
+    model.eval()
+
+    # get labels set
+    train_data_dir = os.path.join(args.raw_data_dir, 'train')
+    labels = os.listdir(train_data_dir)
+
+    # save the output for submission
+    result = []
+    res_names = []
+
+    # compute metrics over the dataset
+    for data_batch, filename_batch in dataloader:
+        # move to GPU if available
+        if params.cuda:
+            data_batch = data_batch.cuda(non_blocking=True)
+
+        # compute model output
+        output_batch = model(data_batch)
+
+        # extract data from torch tensor, move to cpu, convert to numpy arrays
+        output_batch = output_batch.data.cpu().numpy()
+
+        # save the output for submission
+        if args.output:
+            output_batch = [labels[i] for i in np.argmax(output_batch, axis=1)]
+            result.extend(output_batch)
+            res_names.extend(filename_batch)
+
     # save the output for submission
     if args.output:
         with open('result.csv', 'w') as f:
-            f.write('Id,Category\n')
+            f.write('file,species\n')
             for i, r in enumerate(result):
-                f.write('{},{}\n'.format(i, r))
-    return metrics_mean
-
+                f.write('{},{}\n'.format(res_names[i], r))
+    print('The result has been saved to result.csv')
 
 if __name__ == '__main__':
     """
@@ -132,7 +163,5 @@ if __name__ == '__main__':
         args.model_dir, args.restore_file + '.pth.tar'), model)
 
     # Evaluate
-    test_metrics = evaluate(model, loss_fn, test_dl, metrics, params)
-    save_path = os.path.join(
-        args.model_dir, "metrics_test_{}.json".format(args.restore_file))
-    utils.save_dict_to_json(test_metrics, save_path)
+    test(model, loss_fn, test_dl, metrics, params)
+

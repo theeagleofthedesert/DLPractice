@@ -1,0 +1,30 @@
+2024-02-26 15:06:01,702:INFO: Creating the dataset...
+2024-02-26 15:06:01,703:INFO: - done.
+2024-02-26 15:06:01,710:INFO: Starting evaluation
+2024-02-26 15:06:07,168:INFO: - Eval metrics : accuracy: 0.000 ; F1-score: 0.000 ; loss: 5.593
+2024-02-26 15:06:33,388:INFO: Creating the dataset...
+2024-02-26 15:06:33,388:INFO: - done.
+2024-02-26 15:06:33,388:INFO: Starting evaluation
+2024-02-26 15:06:35,845:INFO: - Eval metrics : accuracy: 0.000 ; F1-score: 0.000 ; loss: 5.593
+2024-02-26 15:08:43,619:INFO: Creating the dataset...
+2024-02-26 15:08:43,619:INFO: - done.
+2024-02-26 15:08:43,635:INFO: Starting evaluation
+2024-02-26 15:08:45,961:INFO: - Eval metrics : accuracy: 0.000 ; F1-score: 0.000 ; loss: 5.593
+2024-02-26 15:24:50,290:INFO: Creating the dataset...
+2024-02-26 15:24:50,292:INFO: - done.
+2024-02-26 15:24:50,298:INFO: Starting evaluation
+2024-02-26 15:25:18,109:INFO: Creating the dataset...
+2024-02-26 15:25:18,109:INFO: - done.
+2024-02-26 15:25:18,124:INFO: Starting evaluation
+2024-02-26 15:25:42,582:INFO: Creating the dataset...
+2024-02-26 15:25:42,582:INFO: - done.
+2024-02-26 15:25:42,598:INFO: Starting evaluation
+2024-02-26 15:26:57,172:INFO: Creating the dataset...
+2024-02-26 15:26:57,172:INFO: - done.
+2024-02-26 15:26:57,172:INFO: Starting evaluation
+2024-02-26 15:29:22,619:INFO: Creating the dataset...
+2024-02-26 15:29:22,619:INFO: - done.
+2024-02-26 15:29:22,639:INFO: Starting evaluation
+2024-02-26 15:30:46,298:INFO: Creating the dataset...
+2024-02-26 15:30:46,300:INFO: - done.
+2024-02-26 15:30:46,308:INFO: Starting evaluation

@@ -38,7 +38,7 @@ def resize_and_save(filename, output_dir, size=SIZE, split='train',labels = None
     # In case the image is a .png with an alpha channel, convert it to RGB
     image = image.convert("RGB")  
     if split == 'test':
-        image.save(os.path.join(output_dir, filename.split('\\')[-1]))
+        image.save(os.path.join(output_dir, filename.split('\\')[-1]))  
     else:
         label = filename.split('\\')[-2]
         label = labels.index(label)

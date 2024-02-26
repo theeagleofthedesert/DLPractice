@@ -36,3 +36,7 @@
 2024-02-26 11:43:50,181:INFO: Epoch 10/10
 2024-02-26 11:44:10,305:INFO: - Train metrics: accuracy: 0.766 ; F1-score: 0.766 ; loss: 0.784
 2024-02-26 11:44:17,391:INFO: - Eval metrics : accuracy: 0.823 ; F1-score: 0.823 ; loss: 0.533
+2024-02-26 14:59:31,491:INFO: Loading the datasets...
+2024-02-26 14:59:31,545:INFO: - done.
+2024-02-26 14:59:31,851:INFO: Starting training for 10 epoch(s)
+2024-02-26 14:59:31,852:INFO: Epoch 1/10

@@ -32,5 +32,5 @@ python synthesize_results.py --parent_dir experiments/learning_rate
 
 6. __Evaluation on the test set__ Once you've run many experiments and selected your best model and hyperparameters based on the performance on the validation set, you can finally evaluate the performance of your model on the test set. Run
 ```
-python evaluate.py --data_dir data/64x64_SIGNS --model_dir experiments/base_model
+python evaluate.py --data_dir data\\64x64 --model_dir experiments\\base_model --output True --raw_data_dir data\\RawData
 ```

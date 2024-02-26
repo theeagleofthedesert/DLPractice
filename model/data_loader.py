@@ -56,6 +56,42 @@ class KaggleDataset(Dataset):
         image = self.transform(image)
         return image, self.labels[idx]
 
+class KaggleTestset(Dataset):
+    """
+    A standard PyTorch definition of Dataset which defines the functions __len__ and __getitem__.
+    The class is used for the test dataset, which returns data and filenames.
+    """
+    def __init__(self, data_dir, transform):
+        """
+        Store the filenames of the jpgs to use. Specifies transforms to apply on images.
+
+        Args:
+            data_dir: (string) directory containing the dataset
+            transform: (torchvision.transforms) transformation to apply on image
+        """
+        self.filenames = os.listdir(data_dir)
+        self.filepaths = [os.path.join(data_dir, f) for f in self.filenames if f.endswith('.png')]
+
+        self.transform = transform
+
+    def __len__(self):
+        # return size of dataset
+        return len(self.filepaths)
+
+    def __getitem__(self, idx):
+        """
+        Fetch index idx image and labels from dataset. Perform transforms on image.
+
+        Args:
+            idx: (int) index in [0, 1, ..., size_of_dataset-1]
+
+        Returns:
+            image: (Tensor) transformed image
+            label: (int) corresponding label of image
+        """
+        image = Image.open(self.filepaths[idx])  # PIL image
+        image = self.transform(image)
+        return image, self.filenames[idx]
 
 def fetch_dataloader(types, data_dir, params):
     """
@@ -80,11 +116,14 @@ def fetch_dataloader(types, data_dir, params):
                 dl = DataLoader(KaggleDataset(path, train_transformer), batch_size=params.batch_size, shuffle=True,
                                         num_workers=params.num_workers,
                                         pin_memory=params.cuda)
-            else:
+            elif split == 'valid':
                 dl = DataLoader(KaggleDataset(path, eval_transformer), batch_size=params.batch_size, shuffle=False,
                                 num_workers=params.num_workers,
                                 pin_memory=params.cuda)
-
+            else:
+                dl = DataLoader(KaggleTestset(path, eval_transformer), batch_size=params.batch_size, shuffle=False,
+                                num_workers=params.num_workers,
+                                pin_memory=params.cuda)
             dataloaders[split] = dl
 
     return dataloaders
