@@ -123,6 +123,9 @@ if __name__ == '__main__':
     """
         Evaluate the model on the test set.
     """
+    # Set the random seed for reproducible experiments
+    utils.setup_seed(2024)
+    
     # Load the parameters
     args = parser.parse_args()
     json_path = os.path.join(args.model_dir, 'params.json')

@@ -21,13 +21,13 @@ It will instantiate a model and train it on the training set following the hyper
 
 4. __Your first hyperparameters search__ We created a new directory `learning_rate` in `experiments` for you. Now, run
 ```
-python search_hyperparams.py --data_dir data/64x64_SIGNS --parent_dir experiments/learning_rate
+python search_hyperparams.py --data_dir data\\64x64 --parent_dir experiments\\learning_rate
 ```
 It will train and evaluate a model with different values of learning rate defined in `search_hyperparams.py` and create a new directory for each experiment under `experiments/learning_rate/`.
 
 5. __Display the results__ of the hyperparameters search in a nice format
 ```
-python synthesize_results.py --parent_dir experiments/learning_rate
+python synthesize_results.py --parent_dir experiments\\learning_rate
 ```
 
 6. __Evaluation on the test set__ Once you've run many experiments and selected your best model and hyperparameters based on the performance on the validation set, you can finally evaluate the performance of your model on the test set. Run

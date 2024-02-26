@@ -116,7 +116,7 @@ def fetch_dataloader(types, data_dir, params):
                 dl = DataLoader(KaggleDataset(path, train_transformer), batch_size=params.batch_size, shuffle=True,
                                         num_workers=params.num_workers,
                                         pin_memory=params.cuda)
-            elif split == 'valid':
+            elif split == 'val':
                 dl = DataLoader(KaggleDataset(path, eval_transformer), batch_size=params.batch_size, shuffle=False,
                                 num_workers=params.num_workers,
                                 pin_memory=params.cuda)

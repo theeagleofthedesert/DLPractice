@@ -21,8 +21,7 @@ parser.add_argument('--model_dir', default='experiments\\base_model',
                     help="Directory containing params.json")
 parser.add_argument('--restore_file', default=None,
                     help="Optional, name of the file in --model_dir containing weights to reload before \
-                    training")  # 'best' or 'train'
-
+                    training")  # 'best' or 'last'
 
 def train(model, optimizer, loss_fn, dataloader, metrics, params):
     """Train the model on `num_steps` batches
@@ -150,6 +149,9 @@ def train_and_evaluate(model, train_dataloader, val_dataloader, optimizer, loss_
 
 
 if __name__ == '__main__':
+
+    # Set the random seed for reproducible experiments
+    utils.setup_seed(2024)
 
     # Load the parameters from json file
     args = parser.parse_args()

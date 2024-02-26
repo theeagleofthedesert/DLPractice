@@ -2,8 +2,9 @@ import json
 import logging
 import os
 import shutil
-
+import numpy as np
 import torch
+import random
 
 class Params():
     """Class that loads hyperparameters from a json file.
@@ -140,3 +141,10 @@ def load_checkpoint(checkpoint, model, optimizer=None):
         optimizer.load_state_dict(checkpoint['optim_dict'])
 
     return checkpoint
+
+def setup_seed(seed):
+     torch.manual_seed(seed)
+     torch.cuda.manual_seed_all(seed)
+     np.random.seed(seed)
+     random.seed(seed)
+     torch.backends.cudnn.deterministic = True

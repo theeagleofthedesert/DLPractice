@@ -1,0 +1,37 @@
+2024-02-26 16:10:13,502:INFO: Loading the datasets...
+2024-02-26 16:10:13,534:INFO: - done.
+2024-02-26 16:10:13,545:INFO: Starting training for 10 epoch(s)
+2024-02-26 16:10:13,545:INFO: Epoch 1/10
+2024-02-26 16:10:32,445:INFO: - Train metrics: accuracy: 0.234 ; F1-score: 0.234 ; loss: 2.239
+2024-02-26 16:10:39,300:INFO: - Eval metrics : accuracy: 0.466 ; F1-score: 0.466 ; loss: 1.495
+2024-02-26 16:10:39,346:INFO: - Found new best accuracy
+2024-02-26 16:10:39,346:INFO: Epoch 2/10
+2024-02-26 16:10:57,511:INFO: - Train metrics: accuracy: 0.453 ; F1-score: 0.453 ; loss: 1.680
+2024-02-26 16:11:04,292:INFO: - Eval metrics : accuracy: 0.249 ; F1-score: 0.249 ; loss: 2.428
+2024-02-26 16:11:04,309:INFO: Epoch 3/10
+2024-02-26 16:11:22,590:INFO: - Train metrics: accuracy: 0.547 ; F1-score: 0.547 ; loss: 1.213
+2024-02-26 16:11:29,267:INFO: - Eval metrics : accuracy: 0.458 ; F1-score: 0.458 ; loss: 1.521
+2024-02-26 16:11:29,288:INFO: Epoch 4/10
+2024-02-26 16:11:47,273:INFO: - Train metrics: accuracy: 0.656 ; F1-score: 0.656 ; loss: 1.061
+2024-02-26 16:11:54,018:INFO: - Eval metrics : accuracy: 0.656 ; F1-score: 0.656 ; loss: 1.080
+2024-02-26 16:11:54,065:INFO: - Found new best accuracy
+2024-02-26 16:11:54,065:INFO: Epoch 5/10
+2024-02-26 16:12:12,376:INFO: - Train metrics: accuracy: 0.578 ; F1-score: 0.578 ; loss: 1.172
+2024-02-26 16:12:19,223:INFO: - Eval metrics : accuracy: 0.093 ; F1-score: 0.093 ; loss: 8.866
+2024-02-26 16:12:19,240:INFO: Epoch 6/10
+2024-02-26 16:12:37,494:INFO: - Train metrics: accuracy: 0.672 ; F1-score: 0.672 ; loss: 1.037
+2024-02-26 16:12:44,281:INFO: - Eval metrics : accuracy: 0.643 ; F1-score: 0.643 ; loss: 1.063
+2024-02-26 16:12:44,302:INFO: Epoch 7/10
+2024-02-26 16:13:03,575:INFO: - Train metrics: accuracy: 0.719 ; F1-score: 0.719 ; loss: 1.208
+2024-02-26 16:13:10,479:INFO: - Eval metrics : accuracy: 0.707 ; F1-score: 0.707 ; loss: 0.868
+2024-02-26 16:13:10,527:INFO: - Found new best accuracy
+2024-02-26 16:13:10,527:INFO: Epoch 8/10
+2024-02-26 16:13:28,564:INFO: - Train metrics: accuracy: 0.656 ; F1-score: 0.656 ; loss: 0.821
+2024-02-26 16:13:35,447:INFO: - Eval metrics : accuracy: 0.639 ; F1-score: 0.639 ; loss: 1.099
+2024-02-26 16:13:35,463:INFO: Epoch 9/10
+2024-02-26 16:13:53,883:INFO: - Train metrics: accuracy: 0.719 ; F1-score: 0.719 ; loss: 0.803
+2024-02-26 16:14:00,634:INFO: - Eval metrics : accuracy: 0.765 ; F1-score: 0.765 ; loss: 0.707
+2024-02-26 16:14:00,676:INFO: - Found new best accuracy
+2024-02-26 16:14:00,676:INFO: Epoch 10/10
+2024-02-26 16:14:18,824:INFO: - Train metrics: accuracy: 0.656 ; F1-score: 0.656 ; loss: 1.044
+2024-02-26 16:14:26,024:INFO: - Eval metrics : accuracy: 0.762 ; F1-score: 0.762 ; loss: 0.607
