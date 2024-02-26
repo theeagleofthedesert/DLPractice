@@ -37,17 +37,17 @@ class Net(nn.Module):
         # each of the convolution layers below have the arguments (input_channels, output_channels, filter_size,
         # stride, padding). We also include batch normalisation layers that help stabilise training.
         # For more details on how to use these layers, check out the documentation.
-        self.conv1 = nn.Conv2d(3, self.num_channels, 7, stride=1, padding=3)
+        self.conv1 = nn.Conv2d(3, self.num_channels, 3, stride=1, padding=1)
         self.bn1 = nn.BatchNorm2d(self.num_channels)
-        self.conv2 = nn.Conv2d(self.num_channels, self.num_channels*2, 7, stride=1, padding=3)
+        self.conv2 = nn.Conv2d(self.num_channels, self.num_channels*2, 3, stride=1, padding=1)
         self.bn2 = nn.BatchNorm2d(self.num_channels*2)
-        self.conv3 = nn.Conv2d(self.num_channels*2, self.num_channels*4, 7, stride=1, padding=3)
+        self.conv3 = nn.Conv2d(self.num_channels*2, self.num_channels*4, 3, stride=1, padding=1)
         self.bn3 = nn.BatchNorm2d(self.num_channels*4)
 
         # 2 fully connected layers to transform the output of the convolution layers to the final output
         self.fc1 = nn.Linear(8*8*self.num_channels*4, self.num_channels*4)
         self.fcbn1 = nn.BatchNorm1d(self.num_channels*4)
-        self.fc2 = nn.Linear(self.num_channels*4, 6)       
+        self.fc2 = nn.Linear(self.num_channels*4, 12)       
         self.dropout_rate = params.dropout_rate
 
     def forward(self, s):
@@ -107,17 +107,30 @@ def accuracy(outputs, labels):
     Compute the accuracy, given the outputs and labels for all images.
 
     Args:
-        outputs: (np.ndarray) dimension batch_size x 6 - log softmax output of the model
-        labels: (np.ndarray) dimension batch_size, where each element is a value in [0, 1, 2, 3, 4, 5]
+        outputs: (np.ndarray) dimension batch_size x 12 - log softmax output of the model
+        labels: (np.ndarray) dimension batch_size, where each element is a value in [0, 1, 2, ..., 10, 11]
 
     Returns: (float) accuracy in [0,1]
     """
     outputs = np.argmax(outputs, axis=1)
     return np.sum(outputs==labels)/float(labels.size)
 
+def F1_score(outputs, labels):
+    """
+    Compute the F1-score, given the outputs and labels for all images.
+
+    Args:
+        outputs: (np.ndarray) dimension batch_size x 12 - log softmax output of the model
+        labels: (np.ndarray) dimension batch_size, where each element is a value in [0, 1, 2, ..., 10, 11]
+    """
+    from sklearn.metrics import f1_score
+    outputs = np.argmax(outputs, axis=1)
+    return f1_score(labels, outputs,average='micro')    # average='micro' in fact is the same as accuracy (TP+TN/TP+TN+FP+FN)
+
 
 # maintain all metrics required in this dictionary- these are used in the training and evaluation loops
 metrics = {
     'accuracy': accuracy,
+    'F1-score': F1_score,
     # could add more metrics such as accuracy for each token type
 }

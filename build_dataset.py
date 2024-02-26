@@ -18,6 +18,7 @@ representative as possible, we'll take 20% of "train_signs" as val set.
 import argparse
 import random
 import os
+import numpy as np
 
 from PIL import Image
 from tqdm import tqdm
@@ -34,6 +35,8 @@ def resize_and_save(filename, output_dir, size=SIZE, split='train',labels = None
     image = Image.open(filename)
     # Use bilinear interpolation instead of the default "nearest neighbor" method
     image = image.resize((size, size), Image.BILINEAR)
+    # In case the image is a .png with an alpha channel, convert it to RGB
+    image = image.convert("RGB")  
     if split == 'test':
         image.save(os.path.join(output_dir, filename.split('\\')[-1]))
     else:
@@ -51,7 +54,7 @@ if __name__ == '__main__':
     train_data_dir = os.path.join(args.data_dir, 'train')
     test_data_dir = os.path.join(args.data_dir, 'test')
 
-     # Get the filenames in train directory 
+    # Get the filenames in train directory 
     labels = os.listdir(train_data_dir)
     filenames = []
     for label in labels:
