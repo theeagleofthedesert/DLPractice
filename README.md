@@ -1,3 +1,6 @@
+**This is a practice project using Kaggle competition:**
+_https://www.kaggle.com/competitions/dhu-ailab-image-classification_
+
 1. __Build the dataset of size 64x64__: make sure you complete this step before training
 ```cmd
 python build_dataset.py --data_dir data\\RawData --output_dir data\\64x64
